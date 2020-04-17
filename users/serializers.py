@@ -6,4 +6,4 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'date_joined']
