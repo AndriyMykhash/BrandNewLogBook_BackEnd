@@ -23,6 +23,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def authenticate_user(request):

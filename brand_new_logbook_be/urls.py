@@ -33,5 +33,5 @@ router.register(r'lessons', lesonViews.LesonViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    # path('rest-auth/login/', include("users.views."))
+    path('token-auth/', obtain_auth_token)
 ]
