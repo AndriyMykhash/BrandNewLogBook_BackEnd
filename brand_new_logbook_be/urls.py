@@ -18,6 +18,7 @@ from django.urls import include, path
 from rest_framework import routers
 from users import views as userViews
 from lessons import views as lesonViews
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +32,6 @@ router.register(r'lessons', lesonViews.LesonViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('rest-auth/login/', include("users.views."))
 ]
