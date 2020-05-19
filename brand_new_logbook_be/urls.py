@@ -18,8 +18,10 @@ from django.urls import include, path
 from rest_framework import routers
 from users import views as userViews
 from lessons import views as lesonViews
-from rest_framework.authtoken.views import obtain_auth_token
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
@@ -33,5 +35,6 @@ router.register(r'lessons', lesonViews.LesonViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('token-auth/', obtain_auth_token)
+    path('token-auth/', TokenObtainPairView.as_view()),
+    path('token-refresh/', TokenRefreshView.as_view()),
 ]

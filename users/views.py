@@ -36,6 +36,7 @@ def authenticate_user(request):
             try:
                 payload = jwt_payload_handler(user)
                 token = jwt.encode(payload, settings.SECRET_KEY)
+
                 user_details = {}
                 user_details['name'] = "%s %s" % (
                     user.first_name, user.last_name)
