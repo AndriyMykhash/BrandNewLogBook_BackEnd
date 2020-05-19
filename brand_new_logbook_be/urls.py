@@ -21,6 +21,7 @@ from lessons import views as lesonViews
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
+    TokenVerifyView
 )
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +36,8 @@ router.register(r'lessons', lesonViews.LesonViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('token-auth/', TokenObtainPairView.as_view()),
-    path('token-refresh/', TokenRefreshView.as_view()),
+    path('api-signup/', userViews.create_auth),
+    path('token/auth', TokenObtainPairView.as_view()),
+    path('token/refresh', TokenRefreshView.as_view()),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]

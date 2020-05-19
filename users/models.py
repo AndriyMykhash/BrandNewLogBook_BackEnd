@@ -13,6 +13,8 @@ from django.utils.timezone import utc, now
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField('email address', unique=True)
+    name = models.CharField(max_length=20, default="Anonymous", null=False)
+    surname = models.CharField(max_length=40, default="Anonymous", null=False)
     TYPES = (("ADM", "Admin"), ("STD", "Student"), ("TCH", "Teacher"))
     type = models.CharField(choices=TYPES, max_length=50, default="STD")
     date_joined = models.DateField(null=False, auto_now=True, auto_created=True)

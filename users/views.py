@@ -12,7 +12,7 @@ from brand_new_logbook_be import settings
 from users.models import CustomUser
 from rest_framework import viewsets, status
 from rest_framework import permissions
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, SignUpUserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -54,3 +54,23 @@ def authenticate_user(request):
     except KeyError:
         res = {'error': 'please provide a email and a password'}
         return Response(res)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_auth(request):
+    serialized = SignUpUserSerializer(data=request.POST)
+    if serialized.is_valid():
+        CustomUser.objects.create_user(email=serialized.data["email"],
+                                       password=serialized.data["password"],
+                                       name=serialized.data["name"],
+                                       surname=serialized.data["surname"],
+                                       type=serialized.data["type"])
+        # CustomUser.objects.create_user(email=serialized.get_value("email"),
+        #                                password=serialized.get_value("password"),
+        #                                name=serialized.get_value("name"),
+        #                                surname=serialized.get_value("surname"),
+        #                                type=serialized.get_value("type"),)
+        return Response(serialized.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)
