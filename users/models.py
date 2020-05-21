@@ -18,6 +18,7 @@ class CustomUser(AbstractUser):
     TYPES = (("ADM", "Admin"), ("STD", "Student"), ("TCH", "Teacher"))
     type = models.CharField(choices=TYPES, max_length=50, default="STD")
     date_joined = models.DateField(null=False, auto_now=True, auto_created=True)
+    learn_group = models.CharField(max_length=5, null=False, default="-")
 
     USERNAME_FIELD = 'email'
 

@@ -12,6 +12,8 @@ from rest_framework_jwt.serializers import jwt_payload_handler
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import filters
+from django_filters.rest_framework.backends import DjangoFilterBackend
 
 from brand_new_logbook_be import settings
 from users.models import CustomUser
@@ -26,6 +28,8 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = CustomUser.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [f.name for f in CustomUser._meta.get_fields()]
     permission_classes = [permissions.IsAuthenticated]
 
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'lessons',
     'rest_framework',
+    'django_filters',
     'rest_framework.authtoken',
     'corsheaders'
 ]
@@ -52,6 +53,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTTokenUserAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 MIDDLEWARE = [
@@ -70,7 +73,7 @@ MIDDLEWARE = [
 import datetime
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=60),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=10),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'ALGORITHM': 'HS256',
 }
