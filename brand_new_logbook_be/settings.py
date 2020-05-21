@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     # custom
     'users',
     'lessons',
+    'scheduleItems',
+    'learnGroups',
     'rest_framework',
     'django_filters',
     'rest_framework.authtoken',

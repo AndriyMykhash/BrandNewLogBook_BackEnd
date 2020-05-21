@@ -21,6 +21,6 @@ class TeacherPermission(BasePermission):
 
 
 class LesonViewSet(viewsets.ModelViewSet):
-    queryset = Lesson.objects.all().order_by('-start_on')
+    queryset = Lesson.objects.all().order_by('-id')
     serializer_class = LessonSerializer
     permission_classes = [permissions.IsAuthenticated & TeacherPermission]
