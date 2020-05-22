@@ -7,4 +7,4 @@ class ScheduleItemSerializer(serializers.HyperlinkedModelSerializer):
         model = ScheduleItem
         # lesson = serializers.PrimaryKeyRelatedField(queryset=Lesson.objects.all(), write_only=True)
         # learn_group = serializers.PrimaryKeyRelatedField(queryset=LearnGroup.objects.all(), write_only=True)
-        fields = ['group_id', 'lesson_id', 'duration']
+        fields = ['id', 'group_id', 'lesson_id', 'duration']
