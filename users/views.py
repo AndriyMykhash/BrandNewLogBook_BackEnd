@@ -1,5 +1,6 @@
 from abc import ABC
 
+import django_filters
 import jwt
 from django.contrib.auth import user_logged_in
 from django.shortcuts import render
@@ -16,6 +17,7 @@ from rest_framework import filters
 from django_filters.rest_framework.backends import DjangoFilterBackend
 
 from brand_new_logbook_be import settings
+from brand_new_logbook_be.customElements.MultiplyFilter import MultiplyFilter
 from users.models import CustomUser
 from rest_framework import viewsets, status
 from rest_framework import permissions

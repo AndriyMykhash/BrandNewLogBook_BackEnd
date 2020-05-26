@@ -19,4 +19,4 @@ class ScheduleItem(models.Model):
     day = models.CharField(choices=DAYS, max_length=10, default="MONDAY", null=False)
 
     def __str__(self):
-        return self.id
+        return str(self.group_id)
