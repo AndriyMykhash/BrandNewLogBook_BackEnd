@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -21,6 +22,8 @@ class TeacherPermission(BasePermission):
 
 
 class LesonViewSet(viewsets.ModelViewSet):
-    queryset = Lesson.objects.all().order_by('-start_on')
+    queryset = Lesson.objects.all().order_by('-id')
     serializer_class = LessonSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [f.name for f in Lesson._meta.get_fields()]
     permission_classes = [permissions.IsAuthenticated & TeacherPermission]

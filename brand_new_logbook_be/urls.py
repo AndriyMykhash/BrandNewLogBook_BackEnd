@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
+
 from users import views as user_views
 from lessons import views as lesson_views
+from learnGroups import views as learn_group_views
+from scheduleItems import views as schedule_item_views
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -27,6 +31,8 @@ from rest_framework_simplejwt.views import (
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 router.register(r'lessons', lesson_views.LesonViewSet)
+router.register(r'learnGroups', learn_group_views.LearnGroupViewSet)
+router.register(r'scheduleItems', schedule_item_views.ScheduleItemViewSet)
 
 
 # Wire up our API using automatic URL routing.
