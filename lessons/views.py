@@ -15,10 +15,13 @@ logger = logging.getLogger(__name__)
 
 
 class TeacherPermission(BasePermission):
+
     def has_permission(self, request, view):
         user = request.user
         type = CustomUser.objects.get(id=user.id).type
-        return type == "ADM" or type == "TCH"
+        if request.method == "POST":
+            return type == "ADM" or type == "TCH"
+        return user is not None
 
 
 class LesonViewSet(viewsets.ModelViewSet):

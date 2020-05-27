@@ -40,6 +40,7 @@ class TokenObtainPairWithIdSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super(TokenObtainPairWithIdSerializer, self).validate(attrs)
         data.update({'userId': self.user.id})
+        data.update({'group': self.user.learn_group.id})
 
         return data
 
