@@ -14,8 +14,35 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
 
+from users import views as user_views
+from lessons import views as lesson_views
+from learnGroups import views as learn_group_views
+from scheduleItems import views as schedule_item_views
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
+
+router = routers.DefaultRouter()
+router.register(r'users', user_views.UserViewSet)
+router.register(r'lessons', lesson_views.LesonViewSet)
+router.register(r'learnGroups', learn_group_views.LearnGroupViewSet)
+router.register(r'scheduleItems', schedule_item_views.ScheduleItemViewSet)
+
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-signup/', user_views.create_auth),
+    path('token/auth/', user_views.TokenObtainPairViewWithId.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view()),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
